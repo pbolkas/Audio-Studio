@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" fx:controller="audiostudio.FXMLDocumentController">
+    <children>
+        <Button layoutX="126" layoutY="90" text="Click Me!" onAction="#handleButtonAction" fx:id="button" ></Button>
+        <Label layoutX="126" layoutY="120" minHeight="16" minWidth="69" fx:id="label" >asdadas</Label>
+        <Slider layoutX="10" layoutY="10" minHeight="16" minWidth="100" fx:id="bass" max="10" min="-10"></Slider>
+        <Slider layoutX="10" layoutY="20" minHeight="16" minWidth="100" fx:id="midrange" max="10" min="-10"></Slider>
+    </children>
+</AnchorPane>
