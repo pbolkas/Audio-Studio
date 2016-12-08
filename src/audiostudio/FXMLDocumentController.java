@@ -13,16 +13,21 @@ import java.util.Hashtable;
 import java.util.ResourceBundle;
 
 import com.sun.deploy.panel.RadioPropertyGroup;
+import java.io.File;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.util.StringConverter;
 
 /**
@@ -72,14 +77,22 @@ public class FXMLDocumentController implements Initializable {
     private Label showBalance;
     @FXML
     private Label showVolume;
+    @FXML
+    private Button select;
 
     @FXML
     private StringConverter<Double> tickString = new StringConverter<Double>() {
         @Override
         public String toString(Double n) {
-            if (n == 5) return "R";
-            if (n == -5) return "L";
-            if (n == 0) return "C";
+            if (n == 5) {
+                return "R";
+            }
+            if (n == -5) {
+                return "L";
+            }
+            if (n == 0) {
+                return "C";
+            }
             return "";
         }
 
@@ -96,23 +109,6 @@ public class FXMLDocumentController implements Initializable {
         }
     };
 
-    class Presets {
-
-        int bass;
-        int midrange;
-        int treble;
-        int balance;
-        int volume;
-
-        Presets(int b, int m, int t, int ba, int v) {
-            bass = b;
-            midrange = m;
-            treble = t;
-            balance = ba;
-            volume = v;
-        }
-    }
-
     Presets[] presets = new Presets[3];
     Presets Default;
     Presets Preset1;
@@ -124,10 +120,8 @@ public class FXMLDocumentController implements Initializable {
         Preset2 = presets[2] = new Presets(2, 4, -2, 4, 2);
     }
 
-
     @FXML
     private GridPane grid = new GridPane();
-
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -136,5 +130,75 @@ public class FXMLDocumentController implements Initializable {
         this.m1.setToggleGroup(this.group);
         this.m2.setToggleGroup(this.group);
         this.m0.setSelected(true);
+        setupPresets();
+        updateLabels();
+        addListenerToGroup();
+
+    }
+
+
+    private void updateLabels() {
+        bass.valueProperty().addListener((observable, oldValue, newValue) -> {
+            showBass.setText("Bass : " + String.format("%.0f", newValue));
+
+        });
+
+        midrange.valueProperty().addListener((observable, oldValue, newValue) -> {
+            showMidrange.setText("Midrange : " + String.format("%.0f", newValue));
+        });
+
+        tremble.valueProperty().addListener((observable, oldValue, newValue) -> {
+            showTremble.setText("Tremble : " + String.format("%.0f", newValue));
+        });
+
+        balance.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.intValue() > 0) {
+                showBalance.setText("Balance : R");
+            } else if (newValue.intValue() == 0) {
+                showBalance.setText("Balance : N");
+            } else {
+                showBalance.setText("Balance : L");
+            }
+        });
+
+        volume.valueProperty().addListener((observable, oldValue, newValue) -> {
+            showVolume.setText("Volume : " + String.format("%.0f", newValue));
+        });
+    }
+
+    private void addListenerToGroup(){
+        group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            public void changed(ObservableValue<? extends Toggle> ov,
+                                Toggle old_toggle, Toggle new_toggle) {
+                if (group.getSelectedToggle() != null) {
+                    checkSelection(new Presets[]{Default,Preset1,Preset2});
+                }
+            }
+        });
+    }
+
+
+    private void checkSelection(Presets pin[]){
+        if(m0.isSelected()){
+            bass.setValue(pin[0].bass);
+            midrange.setValue(pin[0].midrange);
+            tremble.setValue(pin[0].treble);
+            balance.setValue(pin[0].balance);
+            volume.setValue(pin[0].volume);
+        }else if(m1.isSelected()){
+
+            bass.setValue(pin[1].bass);
+            midrange.setValue(pin[1].midrange);
+            tremble.setValue(pin[1].treble);
+            balance.setValue(pin[1].balance);
+            volume.setValue(pin[1].volume);
+
+        }else if(m2.isSelected()){
+            bass.setValue(pin[2].bass);
+            midrange.setValue(pin[2].midrange);
+            tremble.setValue(pin[2].treble);
+            balance.setValue(pin[2].balance);
+            volume.setValue(pin[2].volume);
+        }
     }
 }

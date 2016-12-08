@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.media.MediaPlayer;
 
 /**
  *
@@ -26,6 +27,7 @@ public class AudioStudio extends Application {
         stage.setScene(scene);
         stage.setTitle("Audio Studio");
         stage.show();
+        
     }
 
     /**

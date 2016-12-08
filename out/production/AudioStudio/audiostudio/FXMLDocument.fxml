@@ -8,7 +8,9 @@
 <?import javafx.geometry.Insets?>
 
 <GridPane xmlns:fx="http://javafx.com/fxml" fx:controller="audiostudio.FXMLDocumentController" alignment="center" hgap="10" vgap="10" minHeight="400" minWidth="400" styleClass="root">
-    <padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
+    <padding>
+        <Insets top="25" right="25" bottom="25" left="25"/>
+    </padding>
 
     <Label GridPane.columnIndex="0" GridPane.rowIndex="0" text="bass" fx:id="bassLabel"></Label>
     <Label GridPane.columnIndex="0" GridPane.rowIndex="1" text="midrange" fx:id="midrangeLabel"></Label>
@@ -26,18 +28,13 @@
     <RadioButton GridPane.columnIndex="1" GridPane.rowIndex="5" text="m1" fx:id="m1"></RadioButton>
     <RadioButton GridPane.columnIndex="2" GridPane.rowIndex="5" text="m2" fx:id="m2"></RadioButton>
 
-    <Button GridPane.valignment="CENTER" GridPane.halignment="CENTER" GridPane.rowSpan="6" GridPane.columnIndex="0" GridPane.rowIndex="6" text="Store" fx:id="store"></Button>
-    <Label GridPane.halignment="CENTER" GridPane.columnSpan="2" GridPane.columnIndex="1" GridPane.rowIndex="6" text="Bass:" fx:id="showBass"></Label>
-    <Label GridPane.halignment="CENTER" GridPane.columnSpan="2" GridPane.columnIndex="1" GridPane.rowIndex="7" text="Midrange:" fx:id="showMidrange"></Label>
-    <Label GridPane.halignment="CENTER" GridPane.columnSpan="2" GridPane.columnIndex="1" GridPane.rowIndex="8" text="Tremble:" fx:id="showTremble"></Label>
-    <Label GridPane.halignment="CENTER" GridPane.columnSpan="2" GridPane.columnIndex="1" GridPane.rowIndex="9" text="Balance:" fx:id="showBalance"></Label>
-    <Label GridPane.halignment="CENTER" GridPane.columnSpan="2" GridPane.columnIndex="1" GridPane.rowIndex="10" text="Volume:" fx:id="showVolume"></Label>
-
-
-
-
-
-
-
+    <Button GridPane.rowSpan="6" GridPane.columnIndex="0" GridPane.rowIndex="6" text="Store" fx:id="store"></Button>
+    <Label GridPane.columnSpan="2" GridPane.columnIndex="1" GridPane.rowIndex="6" text="Bass:" fx:id="showBass"></Label>
+    <Label GridPane.columnSpan="2" GridPane.columnIndex="1" GridPane.rowIndex="7" text="Midrange:" fx:id="showMidrange"></Label>
+    <Label GridPane.columnSpan="2" GridPane.columnIndex="1" GridPane.rowIndex="8" text="Tremble:" fx:id="showTremble"></Label>
+    <Label GridPane.columnSpan="2" GridPane.columnIndex="1" GridPane.rowIndex="9" text="Balance:" fx:id="showBalance"></Label>
+    <Label GridPane.columnSpan="2" GridPane.columnIndex="1" GridPane.rowIndex="10" text="Volume:" fx:id="showVolume"></Label>
+    
+    <Button GridPane.columnIndex = "0" GridPane.rowIndex="11" text="load audio clip" fx:id="select"></Button>
 
 </GridPane>

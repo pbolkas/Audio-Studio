@@ -5,12 +5,36 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" fx:controller="audiostudio.FXMLDocumentController">
-    <children>
-        <Button layoutX="126" layoutY="90" text="Click Me!" onAction="#handleButtonAction" fx:id="button" ></Button>
-        <Label layoutX="126" layoutY="120" minHeight="16" minWidth="69" fx:id="label" >asdadas</Label>
-        <Slider layoutX="10" layoutY="10" minHeight="16" minWidth="100" fx:id="bass" max="10" min="-10"></Slider>
-        <Slider layoutX="10" layoutY="20" minHeight="16" minWidth="100" fx:id="midrange" max="10" min="-10"></Slider>
-    </children>
-</AnchorPane>
+<GridPane xmlns:fx="http://javafx.com/fxml" fx:controller="audiostudio.FXMLDocumentController" alignment="center" hgap="10" vgap="10" minHeight="400" minWidth="400" styleClass="root">
+    <padding>
+        <Insets top="25" right="25" bottom="25" left="25"/>
+    </padding>
+
+    <Label GridPane.columnIndex="0" GridPane.rowIndex="0" text="bass" fx:id="bassLabel"></Label>
+    <Label GridPane.columnIndex="0" GridPane.rowIndex="1" text="midrange" fx:id="midrangeLabel"></Label>
+    <Label GridPane.columnIndex="0" GridPane.rowIndex="2" text="tremble" fx:id="trembleLabel"></Label>
+    <Label GridPane.columnIndex="0" GridPane.rowIndex="3" text="balance" fx:id="balanceLabel"></Label>
+    <Label GridPane.columnIndex="0" GridPane.rowIndex="4" text="volume" fx:id="volumeLabel"></Label>
+
+    <Slider GridPane.columnSpan="2" GridPane.columnIndex="1" GridPane.rowIndex="0" fx:id="bass"  majorTickUnit="2" minorTickCount="1" min="-10" max="10" value="0" showTickMarks="true" showTickLabels="true"></Slider>
+    <Slider GridPane.columnSpan="2" GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="midrange" majorTickUnit="2" minorTickCount="1" min="-10" max="10" value="0" showTickMarks="true" showTickLabels="true"></Slider>
+    <Slider GridPane.columnSpan="2" GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="tremble" majorTickUnit="2" minorTickCount="1" min="-10" max="10" value="0" showTickMarks="true" showTickLabels="true"></Slider>
+    <Slider GridPane.columnSpan="2" GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="balance" majorTickUnit="2" minorTickCount="1" min="-5" max="5" value="0" showTickLabels="true" showTickMarks="true"></Slider>
+    <Slider GridPane.columnSpan="2" GridPane.columnIndex="1" GridPane.rowIndex="4" fx:id="volume" majorTickUnit="1" min="0" max="10" value="0" showTickLabels="true" showTickMarks="true"></Slider>
+
+    <RadioButton GridPane.columnIndex="0" GridPane.rowIndex="5" text="m0" fx:id="m0"></RadioButton>
+    <RadioButton GridPane.columnIndex="1" GridPane.rowIndex="5" text="m1" fx:id="m1"></RadioButton>
+    <RadioButton GridPane.columnIndex="2" GridPane.rowIndex="5" text="m2" fx:id="m2"></RadioButton>
+
+    <Button GridPane.rowSpan="6" GridPane.columnIndex="0" GridPane.rowIndex="6" text="Store" fx:id="store"></Button>
+    <Label GridPane.columnSpan="2" GridPane.columnIndex="1" GridPane.rowIndex="6" text="Bass:" fx:id="showBass"></Label>
+    <Label GridPane.columnSpan="2" GridPane.columnIndex="1" GridPane.rowIndex="7" text="Midrange:" fx:id="showMidrange"></Label>
+    <Label GridPane.columnSpan="2" GridPane.columnIndex="1" GridPane.rowIndex="8" text="Tremble:" fx:id="showTremble"></Label>
+    <Label GridPane.columnSpan="2" GridPane.columnIndex="1" GridPane.rowIndex="9" text="Balance:" fx:id="showBalance"></Label>
+    <Label GridPane.columnSpan="2" GridPane.columnIndex="1" GridPane.rowIndex="10" text="Volume:" fx:id="showVolume"></Label>
+    
+    <Button GridPane.columnIndex = "0" GridPane.rowIndex="11" text="load audio clip" fx:id="select"></Button>
+
+</GridPane>
