@@ -5,29 +5,17 @@
  */
 package audiostudio;
 
-import java.awt.*;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
 import java.net.URL;
-import java.util.Hashtable;
 import java.util.ResourceBundle;
-
-import com.sun.deploy.panel.RadioPropertyGroup;
-import java.io.File;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.scene.media.*;
 import javafx.util.StringConverter;
 
 /**
@@ -77,8 +65,6 @@ public class FXMLDocumentController implements Initializable {
     private Label showBalance;
     @FXML
     private Label showVolume;
-    @FXML
-    private Button select;
 
     @FXML
     private StringConverter<Double> tickString = new StringConverter<Double>() {
@@ -133,9 +119,10 @@ public class FXMLDocumentController implements Initializable {
         setupPresets();
         updateLabels();
         addListenerToGroup();
-
+        this.store.setOnAction((event) -> {
+            storePresets();
+        });
     }
-
 
     private void updateLabels() {
         bass.valueProperty().addListener((observable, oldValue, newValue) -> {
@@ -166,26 +153,49 @@ public class FXMLDocumentController implements Initializable {
         });
     }
 
-    private void addListenerToGroup(){
+    private void addListenerToGroup() {
         group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             public void changed(ObservableValue<? extends Toggle> ov,
-                                Toggle old_toggle, Toggle new_toggle) {
+                    Toggle old_toggle, Toggle new_toggle) {
                 if (group.getSelectedToggle() != null) {
-                    checkSelection(new Presets[]{Default,Preset1,Preset2});
+                    checkSelection(new Presets[]{Default, Preset1, Preset2});
                 }
             }
         });
     }
 
+    private void storePresets() {
+        if (group.getSelectedToggle() != null) {
+            if (m0.isSelected()) {
+                Default = new Presets((int) (bass.getValue()),
+                        (int) (midrange.getValue()),
+                        (int) (tremble.getValue()),
+                        (int) (balance.getValue()),
+                        (int) (volume.getValue()));
+            } else if (m1.isSelected()) {
+                Preset1 = new Presets((int) (bass.getValue()),
+                        (int) (midrange.getValue()),
+                        (int) (tremble.getValue()),
+                        (int) (balance.getValue()),
+                        (int) (volume.getValue()));
+            } else if (m2.isSelected()) {
+                Preset2 = new Presets((int) (bass.getValue()),
+                        (int) (midrange.getValue()),
+                        (int) (tremble.getValue()),
+                        (int) (balance.getValue()),
+                        (int) (volume.getValue()));
+            }
+        }
+    }
 
-    private void checkSelection(Presets pin[]){
-        if(m0.isSelected()){
+    private void checkSelection(Presets pin[]) {
+        if (m0.isSelected()) {
             bass.setValue(pin[0].bass);
             midrange.setValue(pin[0].midrange);
             tremble.setValue(pin[0].treble);
             balance.setValue(pin[0].balance);
             volume.setValue(pin[0].volume);
-        }else if(m1.isSelected()){
+        } else if (m1.isSelected()) {
 
             bass.setValue(pin[1].bass);
             midrange.setValue(pin[1].midrange);
@@ -193,7 +203,7 @@ public class FXMLDocumentController implements Initializable {
             balance.setValue(pin[1].balance);
             volume.setValue(pin[1].volume);
 
-        }else if(m2.isSelected()){
+        } else if (m2.isSelected()) {
             bass.setValue(pin[2].bass);
             midrange.setValue(pin[2].midrange);
             tremble.setValue(pin[2].treble);
